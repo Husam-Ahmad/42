@@ -6,7 +6,7 @@
 /*   By: huahmad <huahmad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:45:18 by huahmad           #+#    #+#             */
-/*   Updated: 2024/09/17 17:53:03 by huahmad          ###   ########.fr       */
+/*   Updated: 2024/09/20 17:26:46 by huahmad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,38 @@ void my_keyhook(mlx_key_data_t keydata)
 	// 	mlx_close_window();
 }
 
-void	makeground(char *s, mlx_t *t, map_t map)
-{
-	int	x;
-	int	y;
+// void	makeground(char *s, mlx_t *t, map_t map)
+// {
+// 	int	x;
+// 	int	y;
 
-	x = 0;
-	y = 0;
-	while (map->s[y])
-	{
-		while (s[i] == '1')
-		{
-			xpm_t* background_texture = mlx_load_xpm42("./imgs/wall.xpm42"); //1
-			if (!background_texture)
-				error();
-			mlx_image_t* background_img = mlx_texture_to_image(t, &background_texture->texture); //2
-			if (!background_img)
-				error();
-			if (mlx_image_to_window(t, background_img, w, h) < 0) //3
-				error();
-			w += 32;
-		}
-	}
-}
+// 	x = 0;
+// 	y = 0;
+// 	while (map->s[y])
+// 	{
+// 		while (s[i] == '1')
+// 		{
+// 			xpm_t* background_texture = mlx_load_xpm42("./imgs/wall.xpm42"); //1
+// 			if (!background_texture)
+// 				error();
+// 			mlx_image_t* background_img = mlx_texture_to_image(t, &background_texture->texture); //2
+// 			if (!background_img)
+// 				error();
+// 			if (mlx_image_to_window(t, background_img, w, h) < 0) //3
+// 				error();
+// 			w += 32;
+// 		}
+// 	}
+// }
 
-void	makemap(char *s, mlx_t *t)
-{
-	makeground(char *s, mlx_t *t);
-	makewalls(char *s, mlx_t *t);
-	makeplayer(char *s, mlx_t *t);
-	makesticks(char *s, mlx_t *t);
-	// makedoor(char *s, mlx_t *t);
-}
+// void	makemap(char *s, mlx_t *t)
+// {
+// 	makeground(char *s, mlx_t *t);
+// 	makewalls(char *s, mlx_t *t);
+// 	makeplayer(char *s, mlx_t *t);
+// 	makesticks(char *s, mlx_t *t);
+// 	// makedoor(char *s, mlx_t *t);
+// }
 
 void	delete(char *s, mlx_t *t)
 {
@@ -105,8 +105,9 @@ void	delete(char *s, mlx_t *t)
 			if (mlx_image_to_window(t, background_img, x, y) < 0) //3
 				error();
 			x += 32;
+			//lock your computer when you're not here
 		}
-		else if (s[i] == '0')
+		else if (s[i] == '0' || s[i] == 'P' || s[i] == 'C')
 		{
 			xpm_t* ground_texture = mlx_load_xpm42("./imgs/ground.xpm42"); //1
 			if (!ground_texture)
@@ -119,6 +120,24 @@ void	delete(char *s, mlx_t *t)
 			x += 32;
 		}
 		else if (s[i] == 'P')
+			x += 32;
+		else if (s[i] == 'C')
+			x += 32;
+		else if (s[i] == '\n')
+		{
+			y += 32;
+			x = 0;
+		}
+		i++;
+		if (s[i] == 0)
+			break ;
+	}
+	i = 0;
+	y = 0;
+	// x = 0;
+	while (s[i])
+	{
+		if (s[i] == 'P')
 		{
 			xpm_t*	xpm_thing = mlx_load_xpm42("./imgs/player.xpm42"); // 1
 			to_image = mlx_texture_to_image(t, &xpm_thing->texture); // 2
@@ -138,6 +157,10 @@ void	delete(char *s, mlx_t *t)
 				error();
 			x += 32;
 		}
+		else if (s[i] == '1')
+			x += 32;
+		else if (s[i] == '0')
+			x += 32;
 		else if (s[i] == '\n')
 		{
 			y += 32;
@@ -179,7 +202,7 @@ int	main(int argc, char **argv)
 			break ;
 	}
 	close(i);
-	makemap(left, mlx);
+	delete(left, mlx);
 	printf("%s\n", left);
 
 
