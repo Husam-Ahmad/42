@@ -24,8 +24,9 @@ static void error(void)
 	exit(EXIT_FAILURE);
 }
 
-void my_keyhook(mlx_key_data_t keydata)
+void my_keyhook(mlx_key_data_t keydata, void *param)
 {
+	(void) param;
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 	{
 		puts("UP");

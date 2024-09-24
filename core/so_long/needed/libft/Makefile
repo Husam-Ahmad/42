@@ -45,7 +45,7 @@ MAKE = \
 
 OBJECTS = $(SOURCES:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIC
 CC = cc
 
 all: $(NAME)

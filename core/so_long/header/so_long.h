@@ -28,7 +28,7 @@
 # include <string.h>
 # include <stdbool.h>
 # include <math.h>
-# include </nfs/homes/huahmad/core/so_long/needed/libft/libft.h>
+# include "../needed/libft/libft.h"
 
 // #include "needed/libft/libft.h"
 #include <X11/X.h>
