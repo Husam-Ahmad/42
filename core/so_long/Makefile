@@ -34,9 +34,9 @@ libmlx:
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./needed/libft/libft.h $(MLX_FLAGS) 
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) needed/libft/libft.a $(MLX_FLAGS) 
 
-## line 27 has a problem probably with the .h
+
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBMLX)/build

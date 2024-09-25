@@ -84,7 +84,7 @@ void my_keyhook(mlx_key_data_t keydata, void *param)
 // 	// makedoor(char *s, mlx_t *t);
 // }
 
-void	delete(char *s, mlx_t *t)
+void	delete(char *s, mlx_t *t, map_t map)
 {
 	int	i;
 	int	x;
@@ -106,7 +106,6 @@ void	delete(char *s, mlx_t *t)
 			if (mlx_image_to_window(t, background_img, x, y) < 0) //3
 				error();
 			x += 32;
-			//lock your computer when you're not here
 		}
 		else if (s[i] == '0' || s[i] == 'P' || s[i] == 'C')
 		{
@@ -174,6 +173,7 @@ void	delete(char *s, mlx_t *t)
 int	main(int argc, char **argv)
 {
 	mlx_t*	mlx;
+	map_t	map;
 	int	i;
 	char	*left, *buffer, *mapling;
 
@@ -203,7 +203,7 @@ int	main(int argc, char **argv)
 			break ;
 	}
 	close(i);
-	delete(left, mlx);
+	delete(left, mlx, map);
 	printf("%s\n", left);
 
 
