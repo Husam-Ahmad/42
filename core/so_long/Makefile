@@ -18,12 +18,13 @@ cc 		= cc
 INCLUDES = -I $(LIBMLX)/include
 SRCS	= ft_so_long.c
 OBJS	= ${SRCS:.c=.o}
+libft	= ./needed/libft/libft.a
 
 
-all: lbt libmlx $(NAME)
+all: $(LIBFT) libmlx $(NAME)
 
-lbt :
-	make -s -C ./needed/libft
+$(LIBFT):
+	$(MAKE) -C ./needed/libft
 
 libmlx:
 	@cmake -B $(LIBMLX)/build -S $(LIBMLX)
@@ -33,7 +34,8 @@ libmlx:
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./needed/libft/libft.a $(MLX_FLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) needed/libft/libft.a $(MLX_FLAGS) 
+
 
 clean:
 	@rm -rf $(OBJS)
@@ -41,6 +43,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	$(MAKE) -C ./needed/libft fclean
 
 re: clean all
 

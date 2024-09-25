@@ -3,23 +3,28 @@ SOURCES = ft_printf.c \
 		  ft_printf_supporter.c \
 		  ft_printf_converter.c
 
-COMPILER = cc
+COMPILER = gcc
 CFLAGS = -Wall -Wextra -Werror
 OBJECTS = $(SOURCES:.c=.o)
 
+EXECUTABLE = smn
+
 $(NAME): $(OBJECTS)
-	ar rcs $@ $(OBJECTS)
+	ar rcs $@ $(OBJECTS) 
+
+$(EXECUTABLE): $(OBJECTS)
+	$(COMPILER) $(OBJECTS) -o $(EXECUTABLE)
 
 %.o: %.c
-	$(COMPILER) $(CFLAGS) -c $< -o $@
+	$(COMPILER)  $(CFLAGS) -c $< -o $@ 
 
-all: $(NAME)
+all: $(NAME) $(EXECUTABLE)
 
 clean:
 	rm -f $(OBJECTS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(EXECUTABLE)
 
 re: fclean all
 

@@ -75,11 +75,27 @@ int	main(void)
 {
 	int	wtvr ;
 	int	*ptr = &wtvr;
-	ft_printf("Address of pointer: %p\n", ptr);
+	
+	ft_printf("Address of pointer (mine): %p\n", ptr);
+	printf("Address of pointer: %p\n", ptr);
+
+	ft_printf("Address of wtvr directly (mine): %d\n", 0);
 	printf("Address of wtvr directly: %d\n", 0);
-	ft_printf("print this number: %d\n", wtvr);
-	ft_printf("print this string: %p\n");
-	ft_printf("print this character: %c\n", '0');
-	ft_printf("print this character: %%\n");
-	ft_printf("print this hexadecimal: %x\n", 100556);
+
+	ft_printf("print this number (mine): %d\n", wtvr);
+	printf("print this number: %d\n", wtvr);
+
+	// ft_printf("print this string (mine): %p\n");
+	// printf("print this strin: %p\n");
+
+	ft_printf("print this character (mine): %c\n", '0');
+	printf("print this character: %c\n", '0');
+
+	ft_printf("print this character (mine): %%\n");
+	printf("print this character: %%\n");
+
+	ft_printf("print this hexadecimal (mine): %x\n", 100556);
+	printf("print this hexadecimal: %x\n", 100556);
+	// ft_printf("this function works\n ");
 }
+ 
