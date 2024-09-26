@@ -61,5 +61,6 @@ typedef struct map_s
 	int		steps;		// number of steps player did
 } map_t;
 
+map_t game;
 
 #endif

@@ -26,11 +26,13 @@ static void error(void)
 
 void my_keyhook(mlx_key_data_t keydata, void *param)
 {
+
 	(void) param;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS )
 	{
 		puts("UP");
 		to_image->instances[0].y -= 32;
+		game.py -= 1;
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
@@ -41,6 +43,7 @@ void my_keyhook(mlx_key_data_t keydata, void *param)
 	{
 		puts("DOWN");
 		to_image->instances[0].y += 32;
+		game.py += 1;
 	}
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 	{
@@ -84,7 +87,7 @@ void my_keyhook(mlx_key_data_t keydata, void *param)
 // 	// makedoor(char *s, mlx_t *t);
 // }
 
-void	delete(char *s, mlx_t *t, map_t map)
+void	delete(char *s, mlx_t *t)
 {
 	int	i;
 	int	x;
@@ -143,6 +146,8 @@ void	delete(char *s, mlx_t *t, map_t map)
 			to_image = mlx_texture_to_image(t, &xpm_thing->texture); // 2
 			if(mlx_image_to_window(t, to_image, x, y) < 0) //3
 				error();
+			game.py = y;
+			game.px = x;
 			x += 32;
 		}
 		else if (s[i] == 'C')
@@ -166,6 +171,7 @@ void	delete(char *s, mlx_t *t, map_t map)
 			y += 32;
 			x = 0;
 		}
+		game.w += 1;
 		i++;
 	}
 }
@@ -173,7 +179,6 @@ void	delete(char *s, mlx_t *t, map_t map)
 int	main(int argc, char **argv)
 {
 	mlx_t*	mlx;
-	map_t	map;
 	int	i;
 	char	*left, *buffer, *mapling;
 
@@ -190,10 +195,6 @@ int	main(int argc, char **argv)
 		mapling = get_next_line(i);
 		if (mapling)
 		{
-			// mapling = get_next_line(i);
-			// if (!left)
-			// 	left = ;
-			// mapling = buffer;
 			buffer = left;
 			left = ft_strjoin(left, mapling);
 			free(buffer);
@@ -201,10 +202,14 @@ int	main(int argc, char **argv)
 		}
 		else
 			break ;
+		game.h += 1;
 	}
 	close(i);
-	delete(left, mlx, map);
+	delete(left, mlx);
 	printf("%s\n", left);
+	printf("%d\n", game.h);
+	printf("%d\n", game.w / game.h);
+
 
 
 
